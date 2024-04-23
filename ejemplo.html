@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Obtener Datos de Usuario con Fetch</title>
+    <style>
+        /* Estilos CSS */
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        .user-info {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Datos de Usuario</h1>
+        <div class="user-info">
+            <p><strong>Nombre:</strong> <span id="name"></span></p>
+            <p><strong>Email:</strong> <span id="email"></span></p>
+            <p><strong>Username:</strong> <span id="username"></span></p>
+            <p><strong>Website:</strong> <span id="website"></span></p>
+        </div>
+    </div>
+
+    <script>
+        // URL de la API de ejemplo que devuelve datos de usuario
+        
+        random = Math.floor(Math.random() * 10) + 1;
+        const apiUrl = `https://jsonplaceholder.typicode.com/users/${random}`;
+
+        // Función para obtener y mostrar los datos de usuario
+        function fetchUserData() {
+            fetch(apiUrl)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('La solicitud no pudo ser completada. Código de estado: ' + response.status);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    // Modificar el HTML con los datos del usuario obtenidos
+                    document.getElementById('name').textContent = data.name;
+                    document.getElementById('email').textContent = data.email;
+                    document.getElementById('username').textContent = data.username;
+                    document.getElementById('website').textContent = data.website;
+                })
+                .catch(error => {
+                    console.error('Ocurrió un error al obtener los datos del usuario:', error);
+                });
+        }
+
+        // Llamar a la función para obtener y mostrar los datos de usuario
+        fetchUserData();
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Storage</title>
+</head>
+
+<body>
+    <h1>Storage</h1>
+
+    <script>
+        // AGREGAR ITEMS
+        localStorage.setItem('Mami', 'Patty');
+
+        // Agregar multiples items
+        personas = ['Yuki', 'Hana', 'Iggle Piggle'];
+        //localStorage.setItem('Estudiante', personas);
+        localStorage.setItem('Estudiante', JSON.stringify(personas));
+        // imprimir tipo de dato
+        console.log(typeof (localStorage.getItem('Estudiante')));
+
+        // IMPRIMIR ITEMS
+        console.log(localStorage.getItem('Mami'));
+        console.log(localStorage.getItem('Estudiante'));
+
+        // ELIMINAR ITEMS
+        localStorage.removeItem('Mami');
+        console.log(localStorage.getItem('Mami'));
+
+        // ELIMINAR TODO
+        //localStorage.clear();
+        console.log(localStorage.getItem('Mami'));
+
+        // ENCONTRAR CLAVES
+        console.log(localStorage.key(0)); // Devuelve el nombre de la primera clave almacenada
+
+        // CANTIDAD DE ITEMS
+        console.log(localStorage.length);
+
+        // CREAR UNA FUNCION
+        function mostrarPersonas() {
+
+            personas = JSON.parse(localStorage.getItem('Estudiante'));
+            for (let i = 0; i < personas.length; i++) {
+                console.log(`Persona ${i} = ` + personas[i]);
+            }
+        }
+        mostrarPersonas();
+
+    </script>
+</body>
+
+</html>

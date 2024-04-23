@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sessions</title>
+</head>
+<body>
+    <h1>Session Storage</h1>
+
+    <script>
+        sessionStorage.setItem('username', 'carecruz');
+        
+        // Obtener un item de sessionStorage
+        const username = sessionStorage.getItem('username');
+        console.log('Username:', username);
+
+        // Eliminar un item de sessionStorage
+        sessionStorage.removeItem('username');
+
+        // Verificar si un item existe en sessionStorage
+        const isLoggedIn = sessionStorage.getItem('isLoggedIn') !== null;
+        console.log('Is logged in:', isLoggedIn);
+
+        // Limpiar toda la sessionStorage
+        sessionStorage.clear();
+    </script>
+</body>
+</html>

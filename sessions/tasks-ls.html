@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- pico -->
+    <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@latest/css/pico.min.css">
+    <title>Lista de tareas</title>
+</head>
+<body class="container">
+    <h1>Task Manager</h1>
+    <input type="text" id="tarea" placeholder="Nombre de la tarea" required>
+    <button onclick="addTask()">Add Task</button>
+    <ul id="lista">
+        <!-- Agrego a la lista de tareas -->
+    </ul>
+    <button onclick="clearTasks()">Clear Tasks</button>
+
+    <script>
+        // Función para agregar una tarea
+        function addTask() {
+            const tarea = document.getElementById('tarea');
+            const lista = document.getElementById('lista');
+
+            // Obtener las tareas almacenadas en localStorage o inicializar un array vacío
+            let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+
+            // Agregar la nueva tarea al array
+            tasks.push(tarea.value);
+
+            // Actualizar el localStorage con las tareas actualizadas
+            localStorage.setItem('tasks', JSON.stringify(tasks));
+
+            // Limpiar el campo de entrada
+            tarea.value = '';
+
+            // Mostrar las tareas en la lista
+            mostrarTareas();
+        }
+
+        // Función para renderizar las tareas en la lista
+        function mostrarTareas() {
+            const lista = document.getElementById('lista');
+
+            // Limpiar la lista antes de renderizar las tareas
+            lista.innerHTML = '';
+
+            // Obtener las tareas almacenadas en localStorage o inicializar un array vacío
+            let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+
+            // Renderizar cada tarea en la lista
+            tasks.forEach(task => {
+                const li = document.createElement('li');
+                li.textContent = task;
+                lista.appendChild(li);
+            });
+        }
+
+        // Función para limpiar todas las tareas
+        function clearTasks() {
+            // Limpiar las tareas en el localStorage
+            localStorage.removeItem('tasks');
+
+            // Limpiar la lista de tareas en la interfaz
+            const lista = document.getElementById('lista');
+            lista.innerHTML = '';
+        }
+
+        // Al cargar la página, renderizar las tareas almacenadas
+        window.onload = mostrarTareas;
+    </script>
+</body>
+</html>
